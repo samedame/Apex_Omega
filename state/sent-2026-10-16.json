@@ -1,0 +1,9 @@
+[
+ "2026-10-16|ENTRY|P1_OD10_Pullback|18|18",
+ "2026-10-16|ENTRY|P6_PM_NSH_Pullback|242|242",
+ "2026-10-16|EXIT|P1_OD10_Pullback|18|67",
+ "2026-10-16|EXIT|P6_PM_NSH_Pullback|242|245",
+ "2026-10-16|MOVE_STOP|P1_OD10_Pullback|18|40",
+ "INFO:armed",
+ "INFO:regime"
+]
