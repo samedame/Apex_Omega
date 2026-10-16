@@ -42,6 +42,16 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           ACCOUNT_EQUITY: ${{ vars.ACCOUNT_EQUITY }}
           PROVIDER: ${{ vars.PROVIDER || 'yahoo' }}
+          # Tradovate (only read when PROVIDER=tradovate). Unattended runs need NAME/PASSWORD/CID/SEC:
+          # a bare access token only lives ~90 min.
+          TRADOVATE_ACCESS_TOKEN: ${{ secrets.TRADOVATE_ACCESS_TOKEN }}
+          TRADOVATE_NAME: ${{ secrets.TRADOVATE_NAME }}
+          TRADOVATE_PASSWORD: ${{ secrets.TRADOVATE_PASSWORD }}
+          TRADOVATE_CID: ${{ secrets.TRADOVATE_CID }}
+          TRADOVATE_SEC: ${{ secrets.TRADOVATE_SEC }}
+          TRADOVATE_DEVICE_ID: ${{ secrets.TRADOVATE_DEVICE_ID }}
+          TRADOVATE_ENV: ${{ vars.TRADOVATE_ENV || 'live' }}
+          TRADOVATE_SYMBOL: ${{ vars.TRADOVATE_SYMBOL }}
         run: |
           set +e
           python -m apex_omega seed-history || true

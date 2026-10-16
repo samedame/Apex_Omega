@@ -6,6 +6,7 @@ import datetime as dt
 import glob
 import os
 import sys
+import time
 
 from . import __version__
 from . import alerts as A
@@ -32,7 +33,7 @@ def _common(a):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="apex_omega")
-    ap.add_argument("cmd", choices=["run", "once", "eod", "seed-history", "replay", "test-webhook", "status"])
+    ap.add_argument("cmd", choices=["run", "once", "eod", "seed-history", "replay", "test-webhook", "status", "feed-check"])
     ap.add_argument("--provider"); ap.add_argument("--state-dir"); ap.add_argument("--dry", action="store_true",
                     help="print alerts instead of posting to Discord")
     ap.add_argument("--poll", type=float, default=5.0); ap.add_argument("--max-minutes", type=float)
@@ -68,14 +69,38 @@ def main(argv=None):
         print(f"now {now_et():%Y-%m-%d %H:%M:%S ET} | history {len(h)} sessions (latest {h[-1]['date'] if h else 'none'}) | "
               f"webhook {'set' if os.environ.get('DISCORD_WEBHOOK_URL') else 'NOT set (dry run)'} | provider {prov.name}")
         return 0
+    if a.cmd == "feed-check":
+        return _feed_check(prov, a.poll)
     runner = Runner(prov, notifier, state, cfg, seeder=seeder)
-    if a.cmd == "once":
-        r = runner.step(); print(r.date, r.note, "sent", r.sent, "lag", r.lag_s); return 0
-    if a.cmd == "run":
-        return runner.run(poll_s=a.poll, max_minutes=a.max_minutes)
-    if a.cmd == "eod":
-        date = dt.date.fromisoformat(a.date) if a.date else now_et().date()
-        run_eod(prov, notifier, state, date, cfg, a.ledger, seeder=seeder); return 0
+    try:
+        if a.cmd == "once":
+            r = runner.step(); print(r.date, r.note, "sent", r.sent, "lag", r.lag_s); return 0
+        if a.cmd == "run":
+            return runner.run(poll_s=a.poll, max_minutes=a.max_minutes)
+        if a.cmd == "eod":
+            date = dt.date.fromisoformat(a.date) if a.date else now_et().date()
+            run_eod(prov, notifier, state, date, cfg, a.ledger, seeder=seeder); return 0
+    finally:
+        getattr(prov, "close", lambda: None)()
+
+
+def _feed_check(prov, poll_s, rounds=6):
+    """Print what the feed returns so you can compare it with your charting platform (timestamps are the bar START)."""
+    try:
+        for i in range(rounds):
+            snap = prov.fetch()
+            lag = time.time() - snap.last_tick_ts if snap.last_tick_ts else float("nan")
+            print(f"[{i}] source={snap.source} bars={len(snap.bars)} lag={lag:.1f}s")
+            for b in snap.bars[-3:]:
+                from .timeutil import et_from_epoch
+                print(f"    {et_from_epoch(b.ts):%Y-%m-%d %H:%M} ET  O {b.o:,.2f}  H {b.h:,.2f}  L {b.l:,.2f}  C {b.c:,.2f}  V {b.v:,.0f}")
+            if i < rounds - 1:
+                time.sleep(poll_s)
+        return 0
+    except Exception as e:                                                       # noqa: BLE001
+        print(f"FEED CHECK FAILED: {type(e).__name__}: {e}"); return 1
+    finally:
+        getattr(prov, "close", lambda: None)()
 
 
 if __name__ == "__main__":

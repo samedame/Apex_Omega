@@ -103,4 +103,7 @@ def make_provider(spec: str):
         return YahooProvider(spec.split(":", 1)[1])
     if spec.startswith("csv:"):
         return CsvTailProvider(spec.split(":", 1)[1])
+    if spec == "tradovate" or spec.startswith("tradovate:"):
+        from .tradovate import TradovateProvider              # lazy: needs websocket-client only when used
+        return TradovateProvider.from_env(spec)
     raise ValueError(f"unknown provider {spec!r}")

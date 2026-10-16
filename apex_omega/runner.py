@@ -242,6 +242,12 @@ class Runner:
 
     # -------------------------------------------------------------------- loop
     def run(self, poll_s=5.0, max_minutes=None, log=print):
+        try:
+            return self._run_loop(poll_s, max_minutes, log)
+        finally:
+            getattr(self.provider, "close", lambda: None)()            # live feeds hold a socket: release it
+
+    def _run_loop(self, poll_s, max_minutes, log):
         t_start = self.clock()
         while True:
             now = now_et()
