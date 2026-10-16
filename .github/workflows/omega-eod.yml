@@ -1,0 +1,32 @@
+name: omega-eod
+on:
+  schedule:
+    - cron: "35 20 * * 1-5"
+    - cron: "35 21 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      date: { description: "YYYY-MM-DD (default: today ET)", default: "" }
+      scheduled_for_et: { description: "Set by open-scheduler (ignored by the bot)", required: false, default: "" }
+      trigger: { description: "manual | cf-scheduler", required: false, default: "manual" }
+permissions: { contents: write }
+jobs:
+  eod:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - id: guard
+        run: python scripts/session_guard.py --earliest 16:20 --latest 17:10 --force "${{ github.event_name == 'workflow_dispatch' }}"
+      - if: steps.guard.outputs.go == 'true'
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PROVIDER: ${{ vars.PROVIDER || 'yahoo' }}
+        run: python -m apex_omega eod ${{ inputs.date != '' && format('--date {0}', inputs.date) || '' }}
+      - if: steps.guard.outputs.go == 'true'
+        run: |
+          git config user.name "apex-omega-bot"; git config user.email "bot@users.noreply.github.com"
+          git add ledger state || true
+          git diff --cached --quiet || (git commit -m "apex-omega end-of-day [skip ci]" && git pull --rebase -q && git push -q)

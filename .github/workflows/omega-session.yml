@@ -1,0 +1,48 @@
+name: omega-session
+# Runs the live alert loop for one RTH session. GitHub caps a job at 6 h, so the loop stops itself
+# after ~5.5 h and re-dispatches this workflow (hand-off). Two UTC crons cover EDT/EST; the guard
+# step decides which one is the real 09:20 ET start.
+on:
+  schedule:
+    - cron: "20 13 * * 1-5"
+    - cron: "20 14 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      force: { description: "run even outside the 09:05-09:45 ET start window", default: "false" }
+      handoff: { description: "continuation of a running session", default: "false" }
+      scheduled_for_et: { description: "Set by open-scheduler (ignored by the bot)", required: false, default: "" }
+      trigger: { description: "manual | cf-scheduler | handoff", required: false, default: "manual" }
+concurrency: { group: omega-session, cancel-in-progress: false }
+permissions: { contents: write, actions: write }
+jobs:
+  session:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - id: guard
+        run: python scripts/session_guard.py --force "${{ inputs.force == 'true' || inputs.handoff == 'true' }}" ${{ inputs.handoff == 'true' && '--earliest 09:05 --latest 16:00' || '' }}
+      - id: run
+        if: steps.guard.outputs.go == 'true'
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ACCOUNT_EQUITY: ${{ vars.ACCOUNT_EQUITY }}
+          PROVIDER: ${{ vars.PROVIDER || 'yahoo' }}
+        run: |
+          set +e
+          python -m apex_omega seed-history || true
+          python -m apex_omega run --max-minutes 330
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+      - name: Persist de-dupe state
+        if: always() && steps.guard.outputs.go == 'true'
+        run: |
+          git config user.name "apex-omega-bot"; git config user.email "bot@users.noreply.github.com"
+          git add state || true
+          git diff --cached --quiet || (git commit -m "apex-omega state [skip ci]" && git pull --rebase -q && git push -q)
+      - name: Hand off to a fresh job
+        if: steps.run.outputs.code == '75'
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: gh workflow run omega-session.yml -f handoff=true

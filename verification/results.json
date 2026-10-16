@@ -1,0 +1,792 @@
+{
+ "hashes": {
+  "ok": true,
+  "files": [
+   "build_daily_tensors.py",
+   "prepare_fast_matrix.py",
+   "stage10_apex_omega_v2.py",
+   "stage12_compounding_masterpiece.py",
+   "stage12d_optimal_gear_shift.py"
+  ]
+ },
+ "calendar": {
+  "weekdays_checked": 1451,
+  "mismatches": [
+   [
+    "2020-07-21",
+    0,
+    true
+   ],
+   [
+    "2025-02-13",
+    0,
+    true
+   ],
+   [
+    "2025-06-20",
+    17,
+    true
+   ]
+  ],
+  "note": "the mismatches listed are days the exchange was open but the data vendor has no/partial data"
+ },
+ "replay": {
+  "seconds": 41.6,
+  "sessions": 1384,
+  "all_trades": {
+   "n_bot": 4190,
+   "n_oracle": 4190,
+   "n_common": 4190,
+   "only_bot": [],
+   "n_only_bot": 0,
+   "only_oracle": [],
+   "n_only_oracle": 0,
+   "field_mismatches": {
+    "exit_m": 0,
+    "dir": 0,
+    "risk_pts": 0,
+    "net_pts": 0,
+    "net_r": 0
+   },
+   "identical": true
+  },
+  "high_precision_trades": {
+   "n_bot": 2741,
+   "n_oracle": 2741,
+   "n_common": 2741,
+   "only_bot": [],
+   "n_only_bot": 0,
+   "only_oracle": [],
+   "n_only_oracle": 0,
+   "field_mismatches": {
+    "exit_m": 0,
+    "dir": 0,
+    "risk_pts": 0,
+    "net_pts": 0,
+    "net_r": 0
+   },
+   "identical": true
+  },
+  "hp_stats": {
+   "n": 2741,
+   "wr": 0.4188252462604889,
+   "pf": 1.3257749158584542,
+   "avg_r": 0.19487739166323692,
+   "net_r": 534.1589305489324
+  },
+  "exit_reasons": {
+   "STOP": 2418,
+   "TIME": 887,
+   "BE_STOP": 543,
+   "TARGET": 342
+  },
+  "by_pillar": {
+   "P1_OD10_Pullback": 590,
+   "P2_ORB_5m_Delta": 1098,
+   "P3_ORB_15m_Asym": 919,
+   "P4_ORB_20m_HTF": 695,
+   "P5_VWAP_3SD_Rev": 157,
+   "P6_PM_NSH_Pullback": 731
+  }
+ },
+ "saved_ledger": {
+  "apex_omega_v2_master_trades.csv": {
+   "through": "2025-07-24",
+   "n_bot": 4190,
+   "n_oracle": 4190,
+   "n_common": 4190,
+   "only_bot": [],
+   "n_only_bot": 0,
+   "only_oracle": [],
+   "n_only_oracle": 0,
+   "field_mismatches": {
+    "exit_m": 0,
+    "dir": 0,
+    "risk_pts": 0,
+    "net_pts": 0,
+    "net_r": 0
+   },
+   "identical": true
+  },
+  "apex_omega_hp_trades.csv": {
+   "through": "2025-07-24",
+   "n_bot": 2741,
+   "n_oracle": 2741,
+   "n_common": 2741,
+   "only_bot": [],
+   "n_only_bot": 0,
+   "only_oracle": [],
+   "n_only_oracle": 0,
+   "field_mismatches": {
+    "exit_m": 0,
+    "dir": 0,
+    "risk_pts": 0,
+    "net_pts": 0,
+    "net_r": 0
+   },
+   "identical": true
+  }
+ },
+ "sizing": {
+  "2020": {
+   "oracle_final": 4752.57,
+   "bot_final": 4752.57,
+   "contracts_identical": true,
+   "blueprint_claim": 4752.57,
+   "oracle_matches_blueprint": true
+  },
+  "2021": {
+   "oracle_final": 30122.26,
+   "bot_final": 30122.26,
+   "contracts_identical": true,
+   "blueprint_claim": 30122.26,
+   "oracle_matches_blueprint": true
+  },
+  "2022": {
+   "oracle_final": 197096.33,
+   "bot_final": 197096.33,
+   "contracts_identical": true,
+   "blueprint_claim": 197096.33,
+   "oracle_matches_blueprint": true
+  },
+  "2023": {
+   "oracle_final": 3161.81,
+   "bot_final": 3161.81,
+   "contracts_identical": true,
+   "blueprint_claim": 3161.81,
+   "oracle_matches_blueprint": true
+  },
+  "2024": {
+   "oracle_final": 2573173.01,
+   "bot_final": 2573173.01,
+   "contracts_identical": true,
+   "blueprint_claim": 2573173.01,
+   "oracle_matches_blueprint": true
+  },
+  "2025": {
+   "oracle_final": 3479.3,
+   "bot_final": 3479.3,
+   "contracts_identical": true
+  }
+ },
+ "live_path": {
+  "days_tested": 23,
+  "restart_variant_days": 3,
+  "alerts_checked": 221,
+  "problems": [],
+  "n_problems": 0,
+  "seconds": 373.8,
+  "days": [
+   {
+    "date": "2020-03-09",
+    "alerts": 4,
+    "problems": 0
+   },
+   {
+    "date": "2020-03-12",
+    "alerts": 4,
+    "problems": 0
+   },
+   {
+    "date": "2020-03-16",
+    "alerts": 2,
+    "problems": 0
+   },
+   {
+    "date": "2020-03-18",
+    "alerts": 7,
+    "problems": 0
+   },
+   {
+    "date": "2025-02-10",
+    "alerts": 8,
+    "problems": 0
+   },
+   {
+    "date": "2023-05-18",
+    "alerts": 19,
+    "problems": 0
+   },
+   {
+    "date": "2021-03-31",
+    "alerts": 19,
+    "problems": 0
+   },
+   {
+    "date": "2021-08-23",
+    "alerts": 19,
+    "problems": 0
+   },
+   {
+    "date": "2020-12-09",
+    "alerts": 16,
+    "problems": 0
+   },
+   {
+    "date": "2021-06-24",
+    "alerts": 16,
+    "problems": 0
+   },
+   {
+    "date": "2020-07-13",
+    "alerts": 16,
+    "problems": 0
+   },
+   {
+    "date": "2023-05-26",
+    "alerts": 15,
+    "problems": 0
+   },
+   {
+    "date": "2020-08-12",
+    "alerts": 15,
+    "problems": 0
+   },
+   {
+    "date": "2020-02-14",
+    "alerts": 4,
+    "problems": 0
+   },
+   {
+    "date": "2020-02-20",
+    "alerts": 6,
+    "problems": 0
+   },
+   {
+    "date": "2020-02-28",
+    "alerts": 4,
+    "problems": 0
+   },
+   {
+    "date": "2020-04-02",
+    "alerts": 7,
+    "problems": 0
+   },
+   {
+    "date": "2020-04-28",
+    "alerts": 8,
+    "problems": 0
+   },
+   {
+    "date": "2020-06-26",
+    "alerts": 8,
+    "problems": 0
+   },
+   {
+    "date": "2022-10-21",
+    "alerts": 5,
+    "problems": 0
+   },
+   {
+    "date": "2021-05-25",
+    "alerts": 2,
+    "problems": 0
+   },
+   {
+    "date": "2023-05-23",
+    "alerts": 10,
+    "problems": 0
+   },
+   {
+    "date": "2025-07-10",
+    "alerts": 7,
+    "problems": 0
+   },
+   {
+    "date": "2020-03-09",
+    "alerts": 4,
+    "problems": 0,
+    "variant": "3 polls/min + restart every 37 polls"
+   },
+   {
+    "date": "2020-03-12",
+    "alerts": 4,
+    "problems": 0,
+    "variant": "3 polls/min + restart every 37 polls"
+   },
+   {
+    "date": "2020-03-16",
+    "alerts": 2,
+    "problems": 0,
+    "variant": "3 polls/min + restart every 37 polls"
+   }
+  ],
+  "day_selection": "all gap days, busiest days, P5 days, P1 wave-2 days, random days",
+  "forming_bar_poisoned": true
+ },
+ "lookahead": {
+  "prefix_stability": {
+   "sessions": 40,
+   "cutoffs_checked": 320,
+   "violations": [],
+   "n_violations": 0
+  },
+  "backtest_causality": {
+   "sessions_poisoned": 150,
+   "entries_changed_by_future_data": 0,
+   "examples": [],
+   "bot_vs_oracle_on_poisoned_data_identical_runs": "4/4"
+  }
+ },
+ "fuzz": {
+  "runs": [
+   {
+    "seed": 101,
+    "trades": 2291,
+    "identical_all": true,
+    "identical_hp": true,
+    "detail": null,
+    "by_pillar": {
+     "P1_OD10_Pullback": 309,
+     "P2_ORB_5m_Delta": 605,
+     "P3_ORB_15m_Asym": 486,
+     "P4_ORB_20m_HTF": 351,
+     "P5_VWAP_3SD_Rev": 124,
+     "P6_PM_NSH_Pullback": 416
+    },
+    "seconds": 39.3
+   },
+   {
+    "seed": 202,
+    "trades": 2253,
+    "identical_all": true,
+    "identical_hp": true,
+    "detail": null,
+    "by_pillar": {
+     "P1_OD10_Pullback": 304,
+     "P2_ORB_5m_Delta": 590,
+     "P3_ORB_15m_Asym": 492,
+     "P4_ORB_20m_HTF": 348,
+     "P5_VWAP_3SD_Rev": 105,
+     "P6_PM_NSH_Pullback": 414
+    },
+    "seconds": 39.3
+   },
+   {
+    "seed": 303,
+    "trades": 2240,
+    "identical_all": true,
+    "identical_hp": true,
+    "detail": null,
+    "by_pillar": {
+     "P1_OD10_Pullback": 302,
+     "P2_ORB_5m_Delta": 596,
+     "P3_ORB_15m_Asym": 472,
+     "P4_ORB_20m_HTF": 351,
+     "P5_VWAP_3SD_Rev": 102,
+     "P6_PM_NSH_Pullback": 417
+    },
+    "seconds": 39.9
+   }
+  ],
+  "total_trades": 6784
+ },
+ "mutation": {
+  "window": "2022-2023 (1587 oracle trades)",
+  "mutants": 30,
+  "caught": 23,
+  "survivors": [
+   [
+    "P1 CLV 0.40 -> 0.41",
+    "SURVIVED"
+   ],
+   [
+    "P6 session-high lag 5 -> 4",
+    "SURVIVED"
+   ],
+   [
+    "P6 window end 355 -> 354",
+    "SURVIVED"
+   ],
+   [
+    "P1 wave-2 threshold 0.5 -> 0.6R",
+    "SURVIVED"
+   ],
+   [
+    "P5 max hold 75 -> 74",
+    "SURVIVED"
+   ],
+   [
+    "target checked before stop (long)",
+    "SURVIVED"
+   ],
+   [
+    "VWAP variance floor 0.25 -> 0.30",
+    "SURVIVED"
+   ]
+  ],
+  "detail": [
+   {
+    "desc": "P1 drive threshold 1.8 -> 1.7 ATR",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 16,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P1 CLV 0.40 -> 0.41",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P2 CLV 0.45 -> 0.46",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 2,
+     "only_oracle": 3,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P2 RVOL 1.30 -> 1.31",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 4,
+     "only_oracle": 7,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P3 range cap 0.55 -> 0.56 daily ATR",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 1,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P3 RVOL 1.40 -> 1.39",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 1,
+     "only_oracle": 1,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P4 range cap 0.55 -> 0.50",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 14,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P5 upper band 3.0 -> 2.9 SD",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 12,
+     "only_oracle": 3,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P5 RSI long 20 -> 21",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 2,
+     "only_oracle": 1,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P6 recent-high window 10 -> 11",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 3,
+     "only_oracle": 3,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P6 session-high lag 5 -> 4",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P6 window end 355 -> 354",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P1 wave-2 threshold 0.5 -> 0.6R",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P1 re-arm delay 3 -> 2 bars",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 1,
+     "only_oracle": 1,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P5 max hold 75 -> 74",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "ATR floor 4 -> 5",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 6
+    }
+   },
+   {
+    "desc": "min stop 10 -> 9",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 125
+    }
+   },
+   {
+    "desc": "max stop 35 -> 36",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 36
+    }
+   },
+   {
+    "desc": "target checked before stop (long)",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "friction 1.0 -> 0.5 pt",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 3174
+    }
+   },
+   {
+    "desc": "P1 time exit 365 -> 366",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 18
+    }
+   },
+   {
+    "desc": "P2 BE trigger 2.0 -> 2.1R",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 21
+    }
+   },
+   {
+    "desc": "P6 BE lock 0.25 -> 0.30R",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 133
+    }
+   },
+   {
+    "desc": "P5 target 2.5 -> 2.6R",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 37
+    }
+   },
+   {
+    "desc": "EMA9 span 9 -> 10",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 81,
+     "only_oracle": 85,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "VWAP variance floor 0.25 -> 0.30",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "RVOL window 20 -> 19",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 10,
+     "only_oracle": 10,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "daily SMA20 -> SMA19",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 2,
+     "only_oracle": 6,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "daily ATR14 -> 13",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 3,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "HP filter P2 28 -> 29 (caught by the HP-trade comparison)",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   }
+  ]
+ },
+ "mutation_survivor_retest_2020_2025": {
+  "window": "2020-2025 (4190 oracle trades)",
+  "mutants": 7,
+  "caught": 2,
+  "survivors": [
+   [
+    "P6 session-high lag 5 -> 4",
+    "SURVIVED"
+   ],
+   [
+    "P6 window end 355 -> 354",
+    "SURVIVED"
+   ],
+   [
+    "P1 wave-2 threshold 0.5 -> 0.6R",
+    "SURVIVED"
+   ],
+   [
+    "target checked before stop (long)",
+    "SURVIVED"
+   ],
+   [
+    "VWAP variance floor 0.25 -> 0.30",
+    "SURVIVED"
+   ]
+  ],
+  "detail": [
+   {
+    "desc": "P1 CLV 0.40 -> 0.41",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 1,
+     "only_oracle": 1,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P6 session-high lag 5 -> 4",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P6 window end 355 -> 354",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P1 wave-2 threshold 0.5 -> 0.6R",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "P5 max hold 75 -> 74",
+    "verdict": "CAUGHT",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 32
+    }
+   },
+   {
+    "desc": "target checked before stop (long)",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   },
+   {
+    "desc": "VWAP variance floor 0.25 -> 0.30",
+    "verdict": "SURVIVED",
+    "effect": {
+     "only_mutant": 0,
+     "only_oracle": 0,
+     "field_mismatch_cells": 0
+    }
+   }
+  ]
+ },
+ "mutation_survivor_resolution": {
+  "P1 CLV 0.40 -> 0.41": "caught on full 2020-2025 data (1 trade differs)",
+  "P5 max hold 75 -> 74": "caught on full 2020-2025 data (32 field mismatches)",
+  "P1 wave-2 threshold 0.5 -> 0.6R": "no real-data trade falls in (0.5R, 0.6R]; killed by unit test test_p1_wave2_only_after_winner_over_half_r",
+  "target checked before stop (long)": "no 1-minute bar in 2020-2025 touches both stop and target; killed by unit test test_stop_checked_before_target_in_same_bar",
+  "VWAP variance floor 0.25 -> 0.30": "floor never binds on real data; killed by indicator unit test",
+  "P6 window end 355 -> 354": "no real signal on bar 355; killed by new unit test test_p6_signal_allowed_on_last_window_bar_355_but_not_356",
+  "P6 session-high lag 5 -> 4": "equivalent mutant: the 10-bar recent window [m-10,m) always contains bar m-5, so rec_h >= max(prior, H[m-5]) == rec_h >= prior"
+ }
+}

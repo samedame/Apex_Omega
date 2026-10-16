@@ -1,0 +1,7 @@
+# Needs Python 3.10+ (Apple's built-in python3 is 3.9 and will not work).
+# numpy must be 2.x: the float32 arithmetic is bit-exact only under numpy 2 promotion rules.
+# Verified with numpy 2.0.2 + pandas 2.2.3 and with numpy 2.5.3 + pandas 3.0.5.
+numpy>=2.0,<3
+pandas>=2.2
+requests>=2.31
+pyarrow>=15
