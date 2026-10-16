@@ -8,8 +8,9 @@ on:
     - cron: "20 14 * * 1-5"
   workflow_dispatch:
     inputs:
-      force: { description: "run even outside the 09:05-09:45 ET start window", default: "false" }
-      handoff: { description: "continuation of a running session", default: "false" }
+      webhook_test: { description: "Just send a test message to Discord and stop (safe any time)", type: boolean, default: false }
+      force: { description: "run even outside the 09:05-09:45 ET start window", type: boolean, default: false }
+      handoff: { description: "continuation of a running session", type: boolean, default: false }
       scheduled_for_et: { description: "Set by open-scheduler (ignored by the bot)", required: false, default: "" }
       trigger: { description: "manual | cf-scheduler | handoff", required: false, default: "manual" }
 concurrency: { group: omega-session, cancel-in-progress: false }
@@ -23,8 +24,18 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: pip install -r requirements.txt
+      - name: Discord webhook test (manual runs only)
+        if: ${{ inputs.webhook_test == true }}
+        env: { DISCORD_WEBHOOK_URL: "${{ secrets.DISCORD_WEBHOOK_URL }}" }
+        run: python -m apex_omega test-webhook
       - id: guard
-        run: python scripts/session_guard.py --force "${{ inputs.force == 'true' || inputs.handoff == 'true' }}" ${{ inputs.handoff == 'true' && '--earliest 09:05 --latest 16:00' || '' }}
+        if: ${{ inputs.webhook_test != true }}
+        env: { FORCE: "${{ inputs.force }}", HANDOFF: "${{ inputs.handoff }}" }
+        run: |
+          F=false; EXTRA=""
+          [ "$FORCE" = "true" ] && F=true
+          if [ "$HANDOFF" = "true" ]; then F=true; EXTRA="--earliest 09:05 --latest 16:00"; fi
+          python scripts/session_guard.py --force "$F" $EXTRA
       - id: run
         if: steps.guard.outputs.go == 'true'
         env:
