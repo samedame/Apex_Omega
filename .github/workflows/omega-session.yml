@@ -40,7 +40,7 @@ jobs:
         if: steps.guard.outputs.go == 'true'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          ACCOUNT_EQUITY: ${{ vars.ACCOUNT_EQUITY }}
+          ACCOUNT_EQUITY: ${{ vars.ACCOUNT_EQUITY || '1500' }}   # default 1500; a repo variable overrides it
           PROVIDER: ${{ vars.PROVIDER || 'yahoo' }}
         run: |
           set +e
