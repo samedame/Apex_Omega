@@ -1,7 +1,10 @@
 # Needs Python 3.10+ (Apple's built-in python3 is 3.9 and will not work).
 # numpy must be 2.x: the float32 arithmetic is bit-exact only under numpy 2 promotion rules.
-# Verified with numpy 2.0.2 + pandas 2.2.3 and with numpy 2.5.3 + pandas 3.0.5.
+# Verified with numpy 2.0.2 + pandas 2.2.3, with numpy 2.5.3 + pandas 3.0.5 and with numpy 2.2.6 + pandas 2.3.3.
+# pandas is capped below 3.1: pandas 3.1.1 makes the frozen reference script
+# verification/reference/build_daily_tensors.py fail (IndexError at line 65), which turns
+# tests/test_indicators.py::test_indicators_bit_identical_to_reference_tensors red. pandas 3.0.5 passes all 25 tests.
 numpy>=2.0,<3
-pandas>=2.2
+pandas>=2.2,<3.1
 requests>=2.31
 pyarrow>=15
