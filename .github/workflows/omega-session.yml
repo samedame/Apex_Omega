@@ -36,6 +36,11 @@ jobs:
           [ "$FORCE" = "true" ] && F=true
           if [ "$HANDOFF" = "true" ]; then F=true; EXTRA="--earliest 09:05 --latest 16:00"; fi
           python scripts/session_guard.py --force "$F" $EXTRA
+      - name: Log capital source
+        env:
+          CAPITAL_VAR: ${{ vars.ACCOUNT_EQUITY }}
+        run: |
+          if [ -n "$CAPITAL_VAR" ]; then echo "capital=$CAPITAL_VAR source=repo-variable"; else echo "capital=1500 source=default"; fi
       - id: run
         if: steps.guard.outputs.go == 'true'
         env:
@@ -57,3 +62,11 @@ jobs:
         if: steps.run.outputs.code == '75'
         env: { GH_TOKEN: "${{ github.token }}" }
         run: gh workflow run omega-session.yml -f handoff=true
+
+      # A job that crashes posts nothing, and "no alert" looks exactly like "no signal". Best effort, never fails the run.
+      - name: Tell Discord if this run failed
+        if: failure()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python notify_failure.py "Apex Omega live loop"
